@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'admin'], function () {
+    // route group kelas
+    Route::group(['prefix' => 'kelas'], function () {
+        Route::post('tambah-kelas', 'KelasController@store')->name('kelas.tambah-kelas');
+        Route::get('/', 'KelasController@index')->name('kelas.index');
+    });
+});
